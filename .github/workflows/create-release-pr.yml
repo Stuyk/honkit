@@ -2,6 +2,9 @@ name: Create Release PR
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
 jobs:
   create-release-pr:
     runs-on: ubuntu-latest
@@ -9,9 +12,11 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 200
+          fetch-depth: 0
       - name: setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
       - name: Install
         run: yarn install
       - name: Update Version
